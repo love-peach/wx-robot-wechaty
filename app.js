@@ -5,7 +5,7 @@ const axios = require("axios");
 const fs = require('fs');
 const path = require('path');
 const { FileBox } = require('file-box');
-const replyImg = path.resolve(__dirname, './activity.png.jpg');
+const replyImg = path.resolve(__dirname, './activity.png');
 
 var myName = '@币8-瑶瑶';
 var regExpName = new RegExp(myName);
