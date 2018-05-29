@@ -7,7 +7,7 @@ const path = require('path');
 const { FileBox } = require('file-box');
 const replyImg = path.resolve(__dirname, './activity.png');
 
-var myName = '@币8-瑶瑶';
+var myName = '@币8-瑶瑶 ';
 var regExpName = new RegExp(myName);
 
 var replyMessageUrl = 'https://weixin.diyli.cn/wechat/chrome/message';
@@ -70,9 +70,9 @@ Robot
             const room = msg.room();
 
             if(room){
-                console.log(`Room: ${room.topic()} Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content}`)
+                console.log(`Room: ${room.topic()} Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content} c2: ${content.replace(regExpName, '')}`)
             } else{
-                console.log(`Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content}`)
+                console.log(`Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content} c2: ${content.replace(regExpName, '')}`)
             }
             
             axios.get(replyMessageUrl, {
