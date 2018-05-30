@@ -49,7 +49,7 @@ Robot
     })
     .on('message', async msg => {
         try {
-
+            
             /* 如果是自己发的 跳过 */
             if(msg.self()){
                 return;
@@ -65,14 +65,21 @@ Robot
                 return;
             }
 
+            /* 只允许0-10个英文字母 */
+            var wordExp = new RegExp(/^[a-zA-Z]{1,10}$/);
+            var word = msg.text().replace(regExpName, '');
+            if(!wordExp.test(word)) {
+                return;
+            }
+
             const contact = msg.from();
             const content = msg.text();
             const room = msg.room();
 
             if(room){
-                console.log(`Room: ${room.topic()} Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content} c2: ${content.replace(regExpName, '')}`)
+                console.log(`Room: ${room.topic()} Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content}`)
             } else{
-                console.log(`Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content} c2: ${content.replace(regExpName, '')}`)
+                console.log(`Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content}`)
             }
             
             axios.get(replyMessageUrl, {
@@ -84,11 +91,12 @@ Robot
             }).then(response => {
                 const result = response.data;
                 if(result.code == 200){
-                    log.info('Robot', `${result.data}`);
+                    log.info('Robot', `\n${result.data}`);
                     msg.say(result.data);
                 }
             }).catch(err => {
-                console.log(err, 'err');//发生错误时执行的代码
+                log.error(err.code);
+                console.log(err.config.params)
             });
         } catch (e) {
             log.error('Robot', 'start() fail: %s', e);
