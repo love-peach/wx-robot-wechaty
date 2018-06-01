@@ -1,5 +1,5 @@
 const {Wechaty, Contact, log, Message, FriendRequest} = require('wechaty');
-const qrcodeTerminal = require('qrcode-terminal');
+// const qrcodeTerminal = require('qrcode-terminal');
 const axios = require("axios");
 
 const fs = require('fs');
@@ -19,8 +19,9 @@ const Robot = Wechaty.instance();
 Robot
     .on('scan', (url, code) => {
         if (!/201|200/.test(String(code))){
-            let loginUrl = url.replace(/\/qrcode\//, '/l/');
-            qrcodeTerminal.generate(loginUrl, );
+            console.log(url);
+            // let loginUrl = url.replace(/\/qrcode\//, '/l/');
+            // qrcodeTerminal.generate(loginUrl, );
         }
     })
     .on('login', user => {
