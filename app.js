@@ -1,5 +1,5 @@
 const {Wechaty, Contact, log, Message, FriendRequest} = require('wechaty');
-// const qrcodeTerminal = require('qrcode-terminal');
+const qrcodeTerminal = require('qrcode-terminal');
 const axios = require("axios");
 
 const fs = require('fs');
@@ -19,9 +19,8 @@ const Robot = Wechaty.instance();
 Robot
     .on('scan', (url, code) => {
         if (!/201|200/.test(String(code))){
-            console.log(url);
-            // let loginUrl = url.replace(/\/qrcode\//, '/l/');
-            // qrcodeTerminal.generate(loginUrl, );
+            let loginUrl = url.replace(/\/qrcode\//, '/l/');
+            qrcodeTerminal.generate(loginUrl, );
         }
     })
     .on('login', user => {
@@ -50,7 +49,7 @@ Robot
     })
     .on('message', async msg => {
         try {
-            
+
             /* 如果是自己发的 跳过 */
             if(msg.self()){
                 return;
@@ -82,7 +81,7 @@ Robot
             } else{
                 console.log(`Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content}`)
             }
-            
+
             axios.get(replyMessageUrl, {
                 params : { //请求参数
                     content : content.replace(regExpName, ''),
