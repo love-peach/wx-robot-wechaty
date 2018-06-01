@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "wx-robot",
+      "script": "./app.js",
+      "instances": 2,
+      "watch": false,
+      "exec_mode": "cluster_mode"
+    }
+  ]
+}

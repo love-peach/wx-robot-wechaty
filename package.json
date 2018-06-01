@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "pm2 start ./processes.json"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "file-box": "^0.6.4",

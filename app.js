@@ -38,7 +38,7 @@ Robot
                     break;
             }
         } catch (e) {
-            console.log(e.message)
+            console.log('好友变化:', e.message)
         }
         await contact.say(textWord);
         const fileBox = FileBox.packStream(
