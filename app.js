@@ -76,6 +76,11 @@ Robot
             const content = msg.text();
             const room = msg.room();
 
+            if(room && (room.topic() === '币8—专业群')) {
+                console.log('屏蔽专业群');
+                return;
+            }
+
             if(room){
                 console.log(`Room: ${room.topic()} Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content}`)
             } else{

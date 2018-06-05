@@ -3,7 +3,7 @@
     {
       "name": "wx-robot",
       "script": "./app.js",
-      "instances": 2,
+      "instances": 1,
       "watch": false,
       "exec_mode": "cluster_mode"
     }
