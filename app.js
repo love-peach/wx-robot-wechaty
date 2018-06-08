@@ -7,8 +7,8 @@ const path = require('path');
 const { FileBox } = require('file-box');
 const replyImg = path.resolve(__dirname, './activity.png');
 
-var myName = '@币8-瑶瑶 ';
-var regExpName = new RegExp(myName);
+var myName = '';
+var regExpName = null;
 
 var replyMessageUrl = 'https://weixin.diyli.cn/wechat/chrome/message';
 var replyTextWord1 = '1.【加号奖励】感谢你与币8建立沟通链接，送一份数据资料（下方图片），聊表心意。';
@@ -24,6 +24,8 @@ Robot
         }
     })
     .on('login', user => {
+        myName = `@${user.name()}`;
+        regExpName = new RegExp(myName);
         log.info('Robot', `${user.name()} login`)
     })
     .on('friend', async request => {
@@ -32,8 +34,10 @@ Robot
         try {
             switch (request.type()) {
                 case FriendRequest.Type.Receive:
-                case FriendRequest.Type.Confirm:
+                    console.log('Receive');
                     request.accept();
+                case FriendRequest.Type.Confirm:
+                    console.log('Confirm');
                     textWord = replyTextWord1 + '\n\n' + replyTextWord2 + '\n\n' + replyTextWord3;
                     break;
             }
@@ -67,7 +71,7 @@ Robot
 
             /* 只允许0-10个英文字母 */
             var wordExp = new RegExp(/^[a-zA-Z]{1,10}$/);
-            var word = msg.text().replace(regExpName, '');
+            var word = msg.text().replace(regExpName, '').trim();
             if(!wordExp.test(word)) {
                 return;
             }
@@ -87,9 +91,10 @@ Robot
                 console.log(`Contact: ${contact.name()} msgType: ${msg.type()} Content: ${content}`)
             }
 
+
             axios.get(replyMessageUrl, {
                 params : { //请求参数
-                    content : content.replace(regExpName, ''),
+                    content : word,
                     nickName: contact.name(),
                     at: content.indexOf(myName) > -1 ? 1 : 0
                 }
