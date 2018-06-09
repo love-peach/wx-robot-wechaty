@@ -11,9 +11,9 @@ var myName = '';
 var regExpName = null;
 
 var replyMessageUrl = 'https://weixin.diyli.cn/wechat/chrome/message';
-var replyTextWord1 = '1.【加号奖励】感谢你与币8建立沟通链接，送一份数据资料（下方图片），聊表心意。';
+var replyTextWord1 = '1.【加号奖励】感谢你与币发建立沟通链接，送一份数据资料（下方图片），聊表心意。';
 var replyTextWord2 = '2.【私聊/群聊查询】发送：BTC，ETH，EOS等数字货币代号查看实时行情。';
-var replyTextWord3 = '3.【拉群奖励】拉本号进一个币圈群的小伙伴，我将拉你进入币8内部群，群里有已实战翻多倍的大牛和专门的数据团队为你提供专业数据分析服务。';
+var replyTextWord3 = '3.【拉群奖励】拉本号进一个币圈群的小伙伴，我将拉你进入币发内部群，群里有已实战翻多倍的大牛和专门的数据团队为你提供专业数据分析服务。';
 
 const Robot = Wechaty.instance();
 Robot
@@ -80,7 +80,7 @@ Robot
             const content = msg.text();
             const room = msg.room();
 
-            if(room && (room.topic() === '币8—专业群')) {
+            if(room && (room.topic() === '币发—专业群')) {
                 console.log('屏蔽专业群');
                 return;
             }
